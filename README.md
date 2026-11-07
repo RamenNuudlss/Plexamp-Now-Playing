@@ -13,7 +13,7 @@ From a Plex-style card that colors itself from each album to a spinning vinyl re
 [![Themes](https://img.shields.io/badge/themes-23-8A5CF6?style=for-the-badge)](#-the-themes)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2EA043?style=for-the-badge)](LICENSE)
 
-[**Download**](../../releases/latest) · [Install](#-install) · [Themes](#-the-themes) · [Style Studio](#-style-studio) · [Presets & hotkeys](#-presets--hotkeys) · [Troubleshooting](#-troubleshooting)
+[**Download**](https://github.com/RamenNuudlss/Plexamp-Now-Playing/archive/refs/heads/main.zip) · [Install](#-install) · [Themes](#-the-themes) · [Style Studio](#-style-studio) · [Presets & hotkeys](#-presets--hotkeys) · [Troubleshooting](#-troubleshooting)
 
 <br>
 
@@ -104,7 +104,7 @@ Every theme below is shown with the built-in test card (made-up songs and cover 
 
 **You need:** OBS Studio 28 or newer (Windows, macOS or Linux), a Plex Media Server with a music library, and Plexamp.
 
-1. **Download** the latest release zip from [Releases](../../releases/latest) (or click **Code → Download ZIP** on this page) and unzip it somewhere permanent, for example `D:\OBS\plexamp-now-playing\`. Keep these three files together in one folder:
+1. **[Download the ZIP](https://github.com/RamenNuudlss/Plexamp-Now-Playing/archive/refs/heads/main.zip)** (or click **Code → Download ZIP** on this page) and unzip it somewhere permanent, for example `D:\OBS\plexamp-now-playing\`. Keep these three files together in one folder:
    ```
    plexamp-now-playing.lua         ← the OBS script (settings panel, hotkeys)
    plexamp-now-playing.html        ← the overlay itself
