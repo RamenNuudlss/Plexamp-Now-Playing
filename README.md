@@ -131,7 +131,7 @@ You can also paste that whole URL into the token box; the script pulls the token
 > [!CAUTION]
 > Your token works like a password for your Plex account. Don't show the OBS Scripts window on stream, and don't share `config.json` or `config.js`. The script writes those files next to itself, and they're in `.gitignore` here so they never end up in a repo.
 
-## 🖌️ Style Studio
+## 🪄 Style Studio
 
 <img src="docs/images/style-studio.webp" alt="The Style Studio: theme gallery on the left, live preview in the middle, settings on the right" width="100%">
 
@@ -144,7 +144,7 @@ Click **Open the Style Studio** in the script panel (it opens in your web browse
 
 Switch **Songs** to **My Plex** to preview with what you're actually playing.
 
-## 🎛️ Presets & hotkeys
+## 🎹 Presets & hotkeys
 
 Save a look under a name and switch to it any time:
 
@@ -169,7 +169,7 @@ Plexamp has its own gorgeous visualizer. Open Plexamp, switch its visualizer on,
 
 Keep Plexamp open (it can sit behind other windows), but don't minimize it, or there's nothing to capture.
 
-## ⚙️ Settings reference
+## 🔧 Settings reference
 
 <details>
 <summary><b>Plex connection</b></summary>
@@ -228,7 +228,7 @@ Keep Plexamp open (it can sit behind other windows), but don't minimize it, or t
 - The Lua script owns the settings panel and hotkeys. It writes `config.json` (and a `config.js` copy for `file://` pages), which the overlay re-reads live, so changes show up without reloading.
 - The Style Studio stores the look you send on the overlay's browser source; the script notices and saves it as your style code.
 
-## 🛠️ Troubleshooting
+## 🧰 Troubleshooting
 
 <details>
 <summary><b>"Can't reach Plex at …"</b></summary>
