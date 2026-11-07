@@ -1,0 +1,19 @@
+# Written by the OBS script on your machine. config.* holds your Plex server address and token,
+# so it must never be committed.
+/config.json
+/config.js
+
+# Your own saved presets (an example set lives in examples/presets.json)
+/presets.json
+/presets.js
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Release builds
+dist/

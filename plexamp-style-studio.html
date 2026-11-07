@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plexamp Style Studio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<!-- written by the OBS script; gives the Studio your current look and Plex details -->
+<script src="config.js"></script>
+<!-- written by the OBS script: your saved presets -->
+<script src="presets.js"></script>
+<script>window.PNP_META = {"version": "2.0.0", "themes": [{"id": "ultrablur", "name": "Ultrablur", "group": "Modern", "blurb": "Plex-style card that takes its colors from each album.", "size": [680, 220], "sizes": {"tall": [360, 540], "edge": [700, 210], "float": [700, 250]}, "variants": [["card", "Card"], ["tall", "Tall"], ["edge", "Edge-to-edge cover"], ["float", "Floating cover"]], "defaults": {"colors": "album", "background": "album", "enter": "slide-left", "change": "slide", "progress": "bar", "artShape": "rounded"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "slim", "name": "Slim bar", "group": "Modern", "blurb": "A thin strip that fits along the edge of your stream.", "size": [720, 96], "sizes": {}, "variants": [["album", "Album colors"], ["dark", "Dark"], ["light", "Light"]], "defaults": {"colors": "album", "background": "album", "enter": "slide-up", "change": "slide", "progress": "line", "viz": "bars"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": true, "art": true}, "palette": false}, {"id": "island", "name": "Island", "group": "Modern", "blurb": "A black pill that opens up when the song changes, then tucks itself away.", "size": [640, 150], "sizes": {}, "variants": [["auto", "Opens on song change"], ["open", "Always open"], ["compact", "Always compact"]], "defaults": {"colors": "album", "enter": "pop", "change": "signature", "progress": "bar", "artShape": "rounded", "textFx": "none"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": true, "art": true}, "palette": false}, {"id": "spotlight", "name": "Spotlight", "group": "Modern", "blurb": "The cover takes the whole card and drifts slowly, with the song set over it.", "size": [460, 460], "sizes": {"poster": [420, 580], "circle": [420, 540]}, "variants": [["square", "Square"], ["poster", "Poster"], ["circle", "Round cover"]], "defaults": {"colors": "album", "background": "album", "enter": "zoom", "change": "fade", "progress": "line", "artShape": "rounded"}, "variantDefaults": {"circle": {"progress": "ring", "artShape": "circle"}, "poster": {"progress": "bar"}}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "minimal", "name": "Minimal", "group": "Modern", "blurb": "Just type over your stream, no box. An editorial serif with a hairline that tracks the song.", "size": [760, 160], "sizes": {}, "variants": [["left", "Left aligned"], ["right", "Right aligned"], ["center", "Centered"]], "defaults": {"colors": "album", "background": "none", "enter": "fade", "change": "blur", "progress": "line", "artShape": "rounded", "textFx": "blur"}, "variantDefaults": {"center": {"artShape": "hidden"}}, "supports": {"background": true, "ambient": false, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "lowerthird", "name": "Lower third", "group": "Broadcast", "blurb": "TV-style lower third. An accent bar wipes in and the song slides off a tab.", "size": [940, 160], "sizes": {}, "variants": [["dark", "Dark"], ["light", "Light"], ["accent", "Accent color"]], "defaults": {"colors": "album", "enter": "wipe", "change": "wipe", "progress": "line", "artShape": "square", "textCase": "upper"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": true}, {"id": "vinyl", "name": "Vinyl", "group": "Physical media", "blurb": "The record slides out of its sleeve and the tonearm drops onto it. It lifts when you pause.", "size": [800, 250], "sizes": {}, "variants": [["black", "Black vinyl"], ["color", "Colored vinyl"], ["splatter", "Splatter"], ["picture", "Picture disc"]], "defaults": {"colors": "album", "background": "album", "enter": "slide-left", "change": "signature", "progress": "bar", "artShape": "square"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "cassette", "name": "Cassette", "group": "Physical media", "blurb": "A mixtape with a handwritten label. The tape winds from one reel to the other as the song plays.", "size": [600, 384], "sizes": {}, "variants": [["smoke", "Smoke shell"], ["black", "Black shell"], ["white", "White shell"], ["aqua", "Clear aqua"], ["red", "Red shell"], ["artlabel", "Album-art label"]], "defaults": {"colors": "album", "enter": "drop", "change": "signature", "progress": "none", "artShape": "square", "textFx": "none"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": false}, {"id": "cd", "name": "CD", "group": "Physical media", "blurb": "A jewel case with the disc sliding out. Choose the printed side or the rainbow side.", "size": [780, 260], "sizes": {}, "variants": [["printed", "Printed disc"], ["shiny", "Rainbow side"], ["discOnly", "Disc only"]], "defaults": {"colors": "album", "background": "album", "enter": "slide-left", "change": "signature", "progress": "bar", "artShape": "square"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "polaroid", "name": "Polaroid", "group": "Physical media", "blurb": "Every song is an instant photo that develops in front of you and lands on the pile.", "size": [460, 540], "sizes": {}, "variants": [["stack", "Photo pile"], ["single", "Single photo"], ["taped", "Taped to the wall"]], "defaults": {"colors": "album", "enter": "drop", "change": "signature", "progress": "none", "artShape": "square"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": false}, "palette": false}, {"id": "ticket", "name": "Ticket", "group": "Physical media", "blurb": "A concert ticket with the artist as headliner. The stub tears off when the song changes.", "size": [840, 290], "sizes": {}, "variants": [["cream", "Cream paper"], ["white", "White paper"], ["holo", "Holographic foil"], ["kraft", "Kraft paper"]], "defaults": {"colors": "album", "enter": "slide-right", "change": "signature", "progress": "none", "artShape": "square", "textCase": "upper"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": false}, {"id": "receipt", "name": "Receipt", "group": "Physical media", "blurb": "A thermal-printer receipt of what you've been playing. Each new song prints a line and feeds the paper.", "size": [380, 600], "sizes": {"long": [380, 800]}, "variants": [["thermal", "Thermal paper"], ["faded", "Old and faded"], ["long", "Long receipt"]], "defaults": {"colors": "album", "enter": "slide-up", "change": "signature", "progress": "none", "textCase": "upper"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": false}, "palette": false}, {"id": "retroamp", "name": "Retro Amp", "group": "Retro tech", "blurb": "An early-2000s desktop player skin with seven-segment time, a scrolling title and a level meter.", "size": [660, 250], "sizes": {}, "variants": [["classic", "Classic gray"], ["midnight", "Midnight blue"], ["gold", "Brushed gold"], ["album", "Album skin"]], "defaults": {"colors": "own", "enter": "slide-left", "change": "none", "progress": "bar", "viz": "blocks", "artShape": "square"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": true}, {"id": "terminal", "name": "Terminal", "group": "Retro tech", "blurb": "A shell window that types out what's playing every time the song changes.", "size": [700, 270], "sizes": {}, "variants": [["green", "Green phosphor"], ["amber", "Amber"], ["modern", "Modern dark"], ["paper", "Light"]], "defaults": {"colors": "own", "enter": "fade", "change": "signature", "progress": "none", "artShape": "hidden"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "lyrics": true, "art": true}, "palette": true}, {"id": "carstereo", "name": "Car stereo", "group": "Retro tech", "blurb": "A late-night car stereo with a dot-matrix display. The volume knob turns as the song plays.", "size": [760, 170], "sizes": {}, "variants": [["amber", "Amber"], ["ice", "Ice blue"], ["green", "Green"], ["red", "Red"], ["white", "White"]], "defaults": {"colors": "own", "enter": "slide-up", "change": "none", "progress": "none", "artShape": "hidden"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": true}, {"id": "splitflap", "name": "Split-flap board", "group": "Retro tech", "blurb": "A station departures board. The letters flip into place and the clock flips every second.", "size": [990, 216], "sizes": {}, "variants": [["classic", "Classic black"], ["amber", "Amber letters"], ["station", "Station blue"], ["bright", "White tiles"]], "defaults": {"colors": "own", "enter": "fade", "change": "signature", "progress": "none", "artShape": "square", "textCase": "upper"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": true}, {"id": "pixel", "name": "Pixel RPG", "group": "Retro tech", "blurb": "An RPG dialog box. The artist speaks, the cover is pixel art, and the song fills an XP bar.", "size": [760, 250], "sizes": {}, "variants": [["classic", "Classic blue"], ["pocket", "Pocket green"], ["night", "Black and white"], ["album", "Album colors"]], "defaults": {"colors": "album", "enter": "pop", "change": "signature", "progress": "none", "artShape": "square"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": false, "viz": false, "art": true}, "palette": false}, {"id": "neon", "name": "Neon sign", "group": "Night", "blurb": "A neon sign on a brick wall. The letters flicker on for every new song and glow brighter when the music gets loud.", "size": [780, 300], "sizes": {}, "variants": [["brick", "Brick wall"], ["dark", "Dark wall"], ["none", "No wall"]], "defaults": {"colors": "own", "enter": "fade", "change": "signature", "progress": "line", "artShape": "rounded", "textCase": "normal"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": false, "art": true}, "palette": true}, {"id": "synthwave", "name": "Synthwave", "group": "Night", "blurb": "The album cover becomes a striped sunset sun over a moving neon grid, with chrome lettering.", "size": [800, 300], "sizes": {}, "variants": [["sunset", "Sunset"], ["night", "Midnight"], ["miami", "Miami"]], "defaults": {"colors": "own", "enter": "zoom", "change": "fade", "progress": "line", "artShape": "circle", "textCase": "normal"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": false, "art": true}, "palette": true}, {"id": "aero", "name": "Aero", "group": "Y2K", "blurb": "Glossy early-2000s glass with bubbles, a reflection under the cover and a striped progress bar.", "size": [700, 236], "sizes": {}, "variants": [["aqua", "Aqua"], ["lime", "Lime"], ["bubblegum", "Bubblegum"], ["silver", "Silver"]], "defaults": {"colors": "own", "enter": "pop", "change": "zoom", "progress": "bar", "artShape": "rounded"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": true}, {"id": "brutal", "name": "Brutalist", "group": "Graphic", "blurb": "Thick black lines, hard shadows and a sticker for the audio format. Loud on purpose.", "size": [760, 260], "sizes": {}, "variants": [["paper", "Paper"], ["ink", "Ink"], ["album", "Album color"]], "defaults": {"colors": "album", "enter": "drop", "change": "rise", "progress": "bar", "artShape": "square", "textCase": "upper"}, "variantDefaults": {}, "supports": {"background": false, "ambient": false, "effect": true, "progress": true, "viz": true, "lyrics": true, "art": true}, "palette": false}, {"id": "lyrics", "name": "Lyrics", "group": "Karaoke", "blurb": "Synced lyrics from your Plex server, with each line filling in as it's sung. Without lyrics it shows the song.", "size": [920, 300], "sizes": {"subtitle": [920, 150]}, "variants": [["karaoke", "Three lines"], ["single", "One big line"], ["subtitle", "TV subtitles"]], "defaults": {"colors": "album", "background": "none", "enter": "fade", "change": "fade", "progress": "line", "lyrics": "karaoke", "artShape": "rounded"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": false, "art": true}, "palette": false}, {"id": "visualizer", "name": "Visualizer", "group": "Karaoke", "blurb": "A big visualizer driven by Plex's loudness analysis of the song. The round version wraps around the cover.", "size": [820, 260], "sizes": {"radial": [480, 480]}, "variants": [["bars", "Bars"], ["mirror", "Mirrored"], ["line", "Wave"], ["radial", "Round"]], "defaults": {"colors": "album", "background": "album", "enter": "zoom", "change": "slide", "progress": "line", "artShape": "rounded"}, "variantDefaults": {}, "supports": {"background": true, "ambient": true, "effect": true, "progress": true, "viz": false, "art": true}, "palette": false}], "options": {"colors": [["theme", "Theme default"], ["album", "From the album"], ["own", "Theme's own colors"], ["custom", "Custom (hex codes)"], ["sunset", "Sunset"], ["ocean", "Ocean"], ["forest", "Forest"], ["candy", "Candy"], ["ember", "Ember"], ["ice", "Ice"], ["grape", "Grape"], ["matcha", "Matcha"], ["gold", "Gold"], ["mono", "Mono"]], "font": [["theme", "Theme default"], ["Sora", "Sora"], ["Figtree", "Figtree"], ["Manrope", "Manrope"], ["Outfit", "Outfit"], ["Bricolage Grotesque", "Bricolage Grotesque"], ["Space Grotesk", "Space Grotesk"], ["Syne", "Syne"], ["Unbounded", "Unbounded"], ["Archivo", "Archivo"], ["Archivo Black", "Archivo Black"], ["Barlow Condensed", "Barlow Condensed"], ["Oswald", "Oswald"], ["League Gothic", "League Gothic"], ["Fraunces", "Fraunces"], ["Instrument Serif", "Instrument Serif"], ["Instrument Sans", "Instrument Sans"], ["DM Serif Display", "DM Serif Display"], ["Caveat", "Caveat"], ["Permanent Marker", "Permanent Marker"], ["Courier Prime", "Courier Prime"], ["JetBrains Mono", "JetBrains Mono"], ["Space Mono", "Space Mono"], ["VT323", "VT323"], ["Silkscreen", "Silkscreen"], ["Pixelify Sans", "Pixelify Sans"], ["Press Start 2P", "Press Start 2P"], ["Tilt Neon", "Tilt Neon"], ["Neonderthaw", "Neonderthaw"], ["Monoton", "Monoton"], ["Righteous", "Righteous"], ["Mr Dafoe", "Mr Dafoe"], ["Varela Round", "Varela Round"], ["Bungee", "Bungee"], ["Rubik Mono One", "Rubik Mono One"], ["System", "System font"]], "textSize": [["s", "Small"], ["m", "Medium"], ["l", "Large"], ["xl", "Extra large"]], "textCase": [["theme", "Theme default"], ["normal", "As written"], ["upper", "UPPERCASE"], ["lower", "lowercase"]], "corners": [["theme", "Theme default"], ["square", "Square"], ["soft", "Soft"], ["round", "Round"], ["pill", "Extra round"]], "background": [["theme", "Theme default"], ["album", "Album colors"], ["art", "Blurred album art"], ["glass", "Dark glass"], ["solid", "Solid color"], ["gradient", "Two-tone gradient"], ["none", "Transparent"]], "ambient": [["theme", "Theme default"], ["none", "None"], ["flow", "Color flow"], ["aurora", "Aurora"], ["bokeh", "Bokeh lights"], ["particles", "Floating dust"], ["stars", "Starfield"], ["rain", "Rain"], ["snow", "Snow"], ["waves", "Waves"], ["grid", "Retro grid"]], "effect": [["theme", "Theme default"], ["none", "None"], ["glow", "Accent glow"], ["vhs", "VHS tape"], ["film", "8mm film"], ["crt", "CRT screen"], ["scanlines", "Scanlines"], ["grain", "Film grain"], ["holo", "Holographic"], ["chromatic", "Chromatic split"], ["noir", "Black & white"]], "textFx": [["theme", "Theme default"], ["none", "None"], ["scramble", "Scramble"], ["typewriter", "Typewriter"], ["glitch", "Glitch"], ["wave", "Wave in"], ["blur", "Blur in"]], "enter": [["theme", "Theme default"], ["slide-left", "Slide from left"], ["slide-right", "Slide from right"], ["slide-up", "Slide up"], ["slide-down", "Slide down"], ["fade", "Fade"], ["zoom", "Zoom"], ["pop", "Pop"], ["drop", "Drop & bounce"], ["blur", "Blur"], ["wipe", "Wipe"], ["flip", "Flip"], ["none", "Instant"]], "change": [["theme", "Theme default"], ["signature", "Theme's signature move"], ["slide", "Slide"], ["rise", "Rise"], ["fade", "Fade"], ["zoom", "Zoom"], ["blur", "Blur"], ["wipe", "Wipe"], ["flip", "Flip the cover"], ["none", "None"]], "artShape": [["theme", "Theme default"], ["square", "Square"], ["rounded", "Rounded"], ["circle", "Circle"], ["hidden", "Hidden"]], "artMotion": [["theme", "Theme default"], ["none", "None"], ["float", "Float"], ["tilt", "Tilt"], ["pulse", "Pulse to the music"], ["spin", "Spin"], ["breathe", "Glow to the music"]], "progress": [["theme", "Theme default"], ["bar", "Bar"], ["line", "Thin line"], ["waveform", "Waveform"], ["blocks", "LED blocks"], ["dots", "Dots"], ["ring", "Ring around the cover"], ["none", "Hidden"]], "viz": [["theme", "Theme default"], ["none", "Off"], ["bars", "Bars"], ["mirror", "Mirrored bars"], ["line", "Line"], ["dots", "Dots"], ["blocks", "LED blocks"]], "react": [["off", "Off"], ["subtle", "Subtle"], ["strong", "Strong"]], "lyrics": [["theme", "Theme default"], ["off", "Off"], ["line", "One line"], ["karaoke", "Karaoke fill"]], "marquee": [["normal", "Normal"], ["slow", "Slow"], ["fast", "Fast"], ["off", "Off (cut off)"]]}, "builtin": {"colors": "album", "accent": "", "bg": "", "ink": "", "font": "theme", "textSize": "m", "textCase": "normal", "corners": "theme", "opacity": 100, "background": "album", "ambient": "none", "effect": "none", "textFx": "none", "enter": "slide-left", "change": "slide", "artShape": "rounded", "artMotion": "none", "progress": "bar", "viz": "none", "react": "subtle", "lyrics": "off", "marquee": "normal", "showAlbum": true, "showYear": true, "showQuality": true, "showTimes": true, "showEq": true, "showGenre": false, "showDevice": false, "showRating": false, "showPlays": false, "label": ""}, "palettes": {"sunset": {"name": "Sunset", "bg": ["#47203f", "#8a3550", "#b4532f", "#2b1534"], "accent": "#ffb661", "ink": "#fff5ec"}, "ocean": {"name": "Ocean", "bg": ["#0b3045", "#0f566a", "#1b7896", "#081d2b"], "accent": "#62e6d9", "ink": "#ecfdff"}, "forest": {"name": "Forest", "bg": ["#16301f", "#2a4a2c", "#47622f", "#0e1d14"], "accent": "#bde36f", "ink": "#f2f8ea"}, "candy": {"name": "Candy", "bg": ["#5a1f6e", "#c0437c", "#5b3cc4", "#30134a"], "accent": "#ffd3f2", "ink": "#ffffff"}, "ember": {"name": "Ember", "bg": ["#3a120a", "#6b2010", "#963c12", "#200a06"], "accent": "#ff8a3d", "ink": "#fff1e6"}, "ice": {"name": "Ice", "bg": ["#1d2e44", "#2f507a", "#4f80b2", "#121e2d"], "accent": "#c4e9ff", "ink": "#f4fbff"}, "grape": {"name": "Grape", "bg": ["#2a1846", "#4b2479", "#2e3a8c", "#180d2c"], "accent": "#c49bff", "ink": "#f6f0ff"}, "matcha": {"name": "Matcha", "bg": ["#2f3a22", "#56683a", "#7c8a4a", "#1d2416"], "accent": "#e8f5b0", "ink": "#fbfdf1"}, "gold": {"name": "Gold", "bg": ["#2b2213", "#5a4520", "#7d5f22", "#18120a"], "accent": "#ffd36a", "ink": "#fff8e6"}, "mono": {"name": "Mono", "bg": ["#191919", "#262626", "#333333", "#101010"], "accent": "#ffffff", "ink": "#ffffff"}}};</script>
+<style>
+:root {
+  --bg: #14110e; --panel: #1c1814; --panel-2: #241f1a; --raise: #2c261f; --line: #3a3229; --line-2: #4a4035;
+  --ink: #f2e9dc; --muted: #ab9f8d; --faint: #7a6f60;
+  --accent: #e5a00d; --accent-ink: #1a1206; --ok: #72d48e; --warn: #f0b443; --err: #ff6b5b;
+  --r: 10px; --ui: "Figtree", system-ui, "Segoe UI", sans-serif; --head: "Bricolage Grotesque", "Figtree", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.4 var(--ui); -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- header ---------- */
+.top { height: 58px; display: flex; align-items: center; gap: 18px; padding: 0 18px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.brand { display: flex; align-items: baseline; gap: 10px; margin-right: auto; }
+.brand b { font-family: var(--head); font-size: 20px; font-weight: 750; letter-spacing: -.01em; }
+.brand span { color: var(--muted); font-size: 13px; }
+.mark { width: 22px; height: 22px; border-radius: 50%; align-self: center; flex: none;
+  background: radial-gradient(circle, var(--bg) 0 18%, var(--accent) 19% 34%, #1d1915 35% 100%); box-shadow: 0 0 0 1.5px var(--accent) inset; transition: background .6s; }
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; background: var(--bg); border: 1px solid var(--line); }
+.seg button { border: 0; background: none; padding: 5px 11px; border-radius: 7px; color: var(--muted); white-space: nowrap; font-size: 13px; }
+.seg button[aria-pressed="true"] { background: var(--raise); color: var(--ink); box-shadow: 0 1px 0 rgba(255,255,255,.05) inset; }
+.seg button:disabled { opacity: .4; cursor: not-allowed; }
+.hlabel { color: var(--faint); font-size: 12px; margin-right: -10px; }
+.obs-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-2); background: var(--panel-2); padding: 7px 13px; border-radius: 9px; font-weight: 600; }
+.obs-btn i { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); }
+.obs-btn.on i { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.obs-btn.idle i { background: var(--warn); }
+.obs-btn.err i { background: var(--err); }
+
+/* ---------- layout ---------- */
+main { display: grid; grid-template-columns: 286px minmax(0, 1fr) 372px; height: calc(100% - 58px); }
+.gallery, .controls { overflow-y: auto; background: var(--panel); }
+.gallery { border-right: 1px solid var(--line); padding: 14px 14px 30px; }
+.controls { border-left: 1px solid var(--line); padding: 0 0 40px; }
+.gallery::-webkit-scrollbar, .controls::-webkit-scrollbar { width: 10px; }
+.gallery::-webkit-scrollbar-thumb, .controls::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; border: 3px solid var(--panel); }
+
+/* ---------- gallery ---------- */
+.g-head { display: flex; justify-content: space-between; align-items: baseline; margin: 4px 2px 10px; }
+.g-head h2 { font: 700 15px var(--head); margin: 0; }
+.g-head span { color: var(--faint); font-size: 12px; }
+.g-group { color: var(--muted); font-size: 12px; font-weight: 600; margin: 18px 2px 8px; }
+.tile { display: block; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--bg); border-radius: 12px; padding: 8px; margin-bottom: 8px; transition: border-color .15s, background .15s; }
+.tile:hover { border-color: var(--line-2); background: #181410; }
+.tile[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.tile .frame { position: relative; width: 100%; border-radius: 7px; overflow: hidden; background: linear-gradient(120deg, #4b5f37, #9c8a5b 45%, #3b5a73 75%, #a7a69a); }
+.tile iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+.tile .tn { display: flex; justify-content: space-between; align-items: baseline; margin: 7px 2px 0; font-weight: 600; font-size: 13.5px; }
+.tile .tn small { color: var(--faint); font-weight: 400; font-size: 11.5px; }
+
+/* ---------- my presets ---------- */
+.p-box { padding-bottom: 6px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+.p-tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+.btn.small { padding: 5px 10px; font-size: 12.5px; border-radius: 8px; }
+.p-empty { margin: 0 2px 12px; color: var(--faint); font-size: 12.5px; }
+.ptile { border: 1px solid var(--line); background: var(--bg); border-radius: 12px; margin-bottom: 8px; transition: border-color .15s, background .15s; }
+.ptile:hover { border-color: var(--line-2); }
+.ptile[aria-current="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.pt-main { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 8px; border-radius: 12px; }
+.pt-main .frame { position: relative; width: 100%; border-radius: 7px; overflow: hidden; background: linear-gradient(120deg, #4b5f37, #9c8a5b 45%, #3b5a73 75%, #a7a69a); }
+.pt-main iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+.pt-main .tn { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 7px 2px 0; font-weight: 600; font-size: 13.5px; }
+.pt-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pt-main .tn small { flex: none; color: var(--faint); font-weight: 500; font-size: 11.5px; }
+.pt-main .tn small.slot { color: var(--accent); }
+.ptile.dirty .pt-name::after { content: " · edited"; color: var(--warn); font-weight: 500; font-size: 12px; }
+.pt-actions { display: none; flex-wrap: wrap; gap: 4px; padding: 0 8px 9px; }
+.ptile[aria-current="true"] .pt-actions { display: flex; }
+.pt-actions button { border: 1px solid var(--line-2); background: var(--panel-2); color: var(--ink); padding: 4px 9px; border-radius: 7px; font-size: 12px; }
+.pt-actions button:hover:not(:disabled) { background: var(--raise); }
+.pt-actions button:disabled { opacity: .4; cursor: not-allowed; }
+.pt-actions button.go { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.pt-actions button.danger { color: #ff9a8a; }
+.pt-actions button.danger.armed { background: #6b2219; border-color: #a63a2c; color: #fff; }
+.pt-actions .pt-note { flex-basis: 100%; color: var(--faint); font-size: 11.5px; margin-top: 2px; }
+.field { display: grid; gap: 5px; font-size: 13px; color: var(--muted); }
+.nd-note { font-size: 13px; }
+.nd-note.err { color: #ff9a8a; }
+
+/* ---------- stage ---------- */
+.stage { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-width: 0; }
+.th-head { display: flex; align-items: flex-end; gap: 16px; padding: 18px 26px 12px; }
+.th-head h1 { font: 760 30px/1 var(--head); letter-spacing: -.02em; margin: 0; }
+.th-head p { margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
+.th-head .grow { flex: 1; min-width: 0; }
+.variants { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip { border: 1px solid var(--line-2); background: var(--panel); padding: 5px 12px; border-radius: 99px; font-size: 13px; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.pv { position: relative; margin: 0 26px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); display: grid; place-items: center; min-height: 0; }
+.bd { position: absolute; inset: 0; }
+.bd-stream { background:
+  radial-gradient(ellipse 60% 40% at 72% 30%, rgba(255,214,150,.55), transparent 60%),
+  radial-gradient(ellipse 120% 60% at 30% 110%, #2c3b22 0 40%, transparent 41%),
+  radial-gradient(ellipse 90% 50% at 85% 105%, #3c4c2a 0 42%, transparent 43%),
+  linear-gradient(180deg, #4c6a8e 0%, #9db4c6 45%, #d6c7a1 62%, #6f7b4b 63%, #34421f 100%); }
+.bd-stream::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, transparent 2px 120px); filter: blur(1px); }
+.bd-dark { background: #0d0d10; }
+.bd-light { background: #f1efe9; }
+.bd-check { background: repeating-conic-gradient(#2a2622 0 25%, #1f1c19 0 50%) 0 0 / 22px 22px; }
+.bd-obs { background: #000 center / cover no-repeat; }
+.pv-inner { position: relative; z-index: 1; display: grid; place-items: center; }
+.pv iframe { border: 0; display: block; background: transparent; }
+.pv-size { position: absolute; z-index: 2; right: 12px; bottom: 10px; font: 12px var(--mono); color: rgba(255,255,255,.7); background: rgba(0,0,0,.45); padding: 3px 8px; border-radius: 6px; }
+.transport { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 12px 26px 0; }
+.btn { border: 1px solid var(--line-2); background: var(--panel-2); padding: 7px 12px; border-radius: 9px; font-weight: 600; font-size: 13px; }
+.btn:hover { background: var(--raise); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.spacer { flex: 1; }
+.codebar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; margin: 14px 26px 20px; padding: 12px 14px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line); }
+.codebar label { font-weight: 600; font-size: 13px; }
+.code { width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); font: 12.5px var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.codehelp { grid-column: 1 / -1; margin: 0; color: var(--faint); font-size: 12.5px; }
+
+/* ---------- controls ---------- */
+.sec { border-bottom: 1px solid var(--line); }
+.sec > button { display: flex; width: 100%; justify-content: space-between; align-items: center; border: 0; background: none; padding: 14px 18px; font: 700 14.5px var(--head); }
+.sec > button::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin-top: -4px; transition: transform .2s; }
+.sec.closed > button::after { transform: rotate(-45deg); margin-top: 0; }
+.sec.closed .rows { display: none; }
+.rows { padding: 0 18px 14px; display: grid; gap: 12px; }
+.row { display: grid; gap: 6px; }
+.row.off { opacity: .45; }
+.row .lab { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--muted); }
+.row .lab b { color: var(--ink); font-weight: 600; }
+.row .lab .def { color: var(--faint); font-size: 12px; }
+.row .note { color: var(--faint); font-size: 12px; }
+.sel { position: relative; }
+.sel select { width: 100%; appearance: none; padding: 8px 32px 8px 10px; border-radius: var(--r); border: 1px solid var(--line-2); background: var(--panel-2); }
+.sel::after { content: ""; position: absolute; right: 13px; top: 50%; width: 7px; height: 7px; margin-top: -6px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); pointer-events: none; }
+.segs { display: flex; flex-wrap: wrap; gap: 4px; }
+.segs button { flex: 1 1 auto; border: 1px solid var(--line-2); background: var(--panel-2); padding: 6px 8px; border-radius: 8px; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.segs button[aria-pressed="true"] { border-color: var(--accent); color: var(--ink); background: color-mix(in srgb, var(--accent) 16%, var(--panel-2)); }
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.sw { display: grid; gap: 5px; justify-items: center; border: 1px solid var(--line-2); background: var(--panel-2); border-radius: 10px; padding: 7px 4px 6px; font-size: 11.5px; color: var(--muted); }
+.sw[aria-pressed="true"] { border-color: var(--accent); color: var(--ink); box-shadow: 0 0 0 1px var(--accent) inset; }
+.sw i { width: 30px; height: 20px; border-radius: 6px; position: relative; display: block; }
+.sw i::after { content: ""; position: absolute; right: -3px; bottom: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--sa, transparent); box-shadow: 0 0 0 2px var(--panel-2); }
+.colorrow { display: grid; grid-template-columns: 38px 1fr auto; gap: 8px; align-items: center; }
+.colorrow input[type=color] { width: 38px; height: 34px; padding: 0; border: 1px solid var(--line-2); border-radius: 8px; background: none; }
+.colorrow input[type=text], .txt { width: 100%; padding: 8px 10px; border-radius: var(--r); border: 1px solid var(--line-2); background: var(--panel-2); }
+.colorrow input[type=text] { font-family: var(--mono); font-size: 13px; }
+.link { border: 0; background: none; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; font-size: 12.5px; padding: 0; }
+.range { display: grid; grid-template-columns: 1fr 44px; gap: 10px; align-items: center; }
+.range input { width: 100%; accent-color: var(--accent); }
+.range output { font: 12.5px var(--mono); color: var(--muted); text-align: right; }
+.toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+.tog { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); cursor: pointer; }
+.tog input { appearance: none; width: 30px; height: 18px; border-radius: 99px; background: var(--line); position: relative; margin: 0; flex: none; cursor: pointer; transition: background .15s; }
+.tog input::after { content: ""; position: absolute; left: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); transition: transform .15s; }
+.tog input:checked { background: var(--accent); }
+.tog input:checked::after { transform: translateX(12px); background: var(--accent-ink); }
+.resetall { margin: 16px 18px 0; }
+
+/* ---------- OBS dialog ---------- */
+dialog { border: 1px solid var(--line-2); border-radius: 16px; background: var(--panel); color: var(--ink); padding: 0; width: min(520px, 94vw); box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+dialog::backdrop { background: rgba(8,6,4,.6); }
+.dlg { padding: 22px 24px 20px; display: grid; gap: 14px; }
+.dlg h3 { margin: 0; font: 750 21px var(--head); }
+.dlg p { margin: 0; color: var(--muted); }
+.dlg ol { margin: 0; padding-left: 20px; color: var(--muted); display: grid; gap: 4px; }
+.dlg ol b { color: var(--ink); font-weight: 600; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fields label { display: grid; gap: 5px; font-size: 13px; color: var(--muted); }
+.status { padding: 10px 12px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); font-size: 13px; }
+.status.ok { border-color: color-mix(in srgb, var(--ok) 50%, var(--line)); }
+.status.err { border-color: color-mix(in srgb, var(--err) 60%, var(--line)); }
+.dlg .actions { display: flex; gap: 8px; align-items: center; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 20px); background: var(--ink); color: var(--bg); padding: 9px 16px; border-radius: 10px; font-weight: 600; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 10; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 1200px) { main { grid-template-columns: 230px minmax(0, 1fr) 330px; } }
+@media (max-width: 960px) {
+  html, body { height: auto; }
+  .top { flex-wrap: wrap; height: auto; padding: 10px 16px; }
+  main { display: block; height: auto; }
+  .gallery { border: 0; padding: 12px 16px; }
+  .hlabel { display: none; }
+  .gallery .g-group, #themesBox .g-head { display: none; }
+  #presetList, #themesBox { display: flex; align-items: flex-start; gap: 10px; overflow-x: auto; }
+  .tile, .ptile { width: 200px; flex: none; }
+  .pv { margin: 0 16px; height: 320px; }
+  .th-head, .transport { padding-left: 16px; padding-right: 16px; }
+  .codebar { margin: 14px 16px; grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"></span><b>Style Studio</b><span>for Plexamp Now Playing</span></div>
+  <span class="hlabel">Songs</span>
+  <div class="seg" id="srcSeg" role="group" aria-label="Songs in the preview">
+    <button data-v="demo" aria-pressed="true">Demo</button>
+    <button data-v="plex" aria-pressed="false">My Plex</button>
+  </div>
+  <span class="hlabel">Behind it</span>
+  <div class="seg" id="bdSeg" role="group" aria-label="Preview background">
+    <button data-v="stream" aria-pressed="true">Game</button>
+    <button data-v="dark" aria-pressed="false">Dark</button>
+    <button data-v="light" aria-pressed="false">Light</button>
+    <button data-v="check" aria-pressed="false">See-through</button>
+    <button data-v="obs" aria-pressed="false" disabled title="Connect to OBS first">My scene</button>
+  </div>
+  <button class="obs-btn" id="obsBtn"><i></i><span>Connect to OBS</span></button>
+</header>
+
+<main>
+  <aside class="gallery" id="gallery" aria-label="Presets and themes">
+    <section class="p-box" aria-label="My presets">
+      <div class="g-head"><h2>My presets</h2><span id="pCount"></span></div>
+      <div class="p-tools">
+        <button class="btn small primary" id="bSaveP">Save this look</button>
+        <button class="btn small" id="bPushAll" hidden>Add to OBS</button>
+      </div>
+      <p class="p-empty" id="pEmpty">Save looks you like, then switch between them in OBS from Tools → Scripts → Presets, or with the hotkeys "Plexamp: Preset 1" to "Preset 10".</p>
+      <div id="presetList"></div>
+    </section>
+    <section id="themesBox" aria-label="Themes"></section>
+  </aside>
+
+  <section class="stage">
+    <div class="th-head">
+      <div class="grow">
+        <h1 id="thName">Ultrablur</h1>
+        <p id="thBlurb"></p>
+        <div class="variants" id="variants" role="group" aria-label="Style"></div>
+      </div>
+    </div>
+    <div class="pv" id="pv">
+      <div class="bd bd-stream" id="bd"></div>
+      <div class="pv-inner" id="pvInner"><iframe id="preview" title="Overlay preview"></iframe></div>
+      <span class="pv-size" id="pvSize"></span>
+    </div>
+    <div>
+      <div class="transport">
+        <button class="btn" id="bReplay">Replay entrance</button>
+        <button class="btn" id="bNext">Next song</button>
+        <button class="btn" id="bPause">Pause</button>
+        <span class="spacer"></span>
+        <button class="btn" id="bSaveP2">Save as preset</button>
+        <button class="btn" id="bSend" disabled>Send to OBS</button>
+      </div>
+      <div class="codebar">
+        <label for="code">Style code</label>
+        <input class="code" id="code" readonly>
+        <button class="btn primary" id="bCopy">Copy</button>
+        <button class="btn" id="bLoad">Paste a code</button>
+        <p class="codehelp" id="codeHelp">Paste this into Tools → Scripts → Plexamp Now Playing → Style code, or connect to OBS and send it straight there.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="controls" id="controls" aria-label="Settings"></aside>
+</main>
+
+<dialog id="obsDlg">
+  <form method="dialog" class="dlg" id="obsForm">
+    <h3>Send looks straight to OBS</h3>
+    <p>The Studio talks to OBS's built-in WebSocket server. It's off by default:</p>
+    <ol>
+      <li>In OBS, open <b>Tools → WebSocket Server Settings</b>.</li>
+      <li>Tick <b>Enable WebSocket server</b>, then click <b>Show Connect Info</b>.</li>
+      <li>Copy the <b>Server Password</b> into the box below.</li>
+    </ol>
+    <div class="fields">
+      <label>Address<input class="txt" id="wsUrl" value="ws://127.0.0.1:4455" spellcheck="false"></label>
+      <label>Password<input class="txt" id="wsPass" type="password" autocomplete="off" spellcheck="false"></label>
+    </div>
+    <label class="check"><input type="checkbox" id="wsRemember"> Remember the password on this computer</label>
+    <div class="status" id="wsStatus">Not connected.</div>
+    <label class="check"><input type="checkbox" id="wsLive" checked> Send every change live while connected</label>
+    <div class="actions">
+      <button type="button" class="btn primary" id="wsConnect">Connect</button>
+      <button type="button" class="btn" id="wsDisconnect" disabled>Disconnect</button>
+      <span class="spacer"></span>
+      <button class="btn" value="close">Close</button>
+    </div>
+  </form>
+</dialog>
+<dialog id="nameDlg">
+  <form method="dialog" class="dlg" id="nameForm">
+    <h3 id="ndTitle">Save this look as a preset</h3>
+    <label class="field">Name<input class="txt" id="ndName" maxlength="60" autocomplete="off" spellcheck="false"></label>
+    <p class="nd-note" id="ndNote"></p>
+    <div class="actions">
+      <button type="submit" class="btn primary" id="ndOk">Save</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn" id="ndCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+"use strict";
+const META = window.PNP_META;
+const T = {}; META.themes.forEach((t) => (T[t.id] = t));
+const OPT = META.options, BUILTIN = META.builtin, PAL = META.palettes;
+const OVERLAY = "plexamp-now-playing.html";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} } };
+const STYLE_KEYS = Object.keys(BUILTIN);
+
+/* ---------------- style codes (same format as the overlay) ---------------- */
+function b64e(str) { const b = new TextEncoder().encode(str); let s = ""; for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function b64d(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; const bin = atob(s); const b = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i); return new TextDecoder().decode(b); }
+function encode(st) { const body = {}; for (const k of STYLE_KEYS) if (st[k] !== undefined && st[k] !== "theme") body[k] = st[k]; return "pnp1." + st.theme + "." + (st.variant || "") + "." + b64e(JSON.stringify(body)); }
+function decode(code) {
+  const m = /^pnp1\.([a-z0-9-]+)\.([a-z0-9-]*)\.([A-Za-z0-9_-]*)$/.exec(String(code || "").trim()); if (!m || !T[m[1]]) return null;
+  try { const body = m[3] ? JSON.parse(b64d(m[3])) : {}; body.theme = m[1]; body.variant = m[2]; return body; } catch (e) { return null; }
+}
+
+/* ---------------- state ---------------- */
+const CFG = window.PNP_CONFIG || null;
+const hasPlex = !!(CFG && CFG.server && CFG.token);
+function fromConfig() {
+  if (!CFG) return null;
+  if (CFG.styleCode) { const d = decode(CFG.styleCode); if (d) return d; }
+  const s = { theme: T[CFG.theme] ? CFG.theme : "ultrablur", variant: CFG.variant || "" };
+  for (const k of STYLE_KEYS) if (CFG[k] !== undefined && CFG[k] !== "theme" && CFG[k] !== "") s[k] = CFG[k];
+  return s;
+}
+let user = fromConfig() || store.get("pnp-studio-style", null) || { theme: "ultrablur" };
+if (!T[user.theme]) user = { theme: "ultrablur" };
+let source = "demo", backdrop = store.get("pnp-studio-backdrop", "stream"), paused = false;
+
+function themeDefaults(st) {
+  const t = T[st.theme]; const vids = t.variants.map((v) => v[0]);
+  const variant = vids.includes(st.variant) ? st.variant : (vids[0] || "");
+  return { t, variant, d: Object.assign({}, t.defaults || {}, (t.variantDefaults || {})[variant] || {}) };
+}
+function resolved(st) {
+  const { variant, d } = themeDefaults(st); const out = { theme: st.theme, variant };
+  for (const k of STYLE_KEYS) { const v = st[k]; const set = v !== undefined && v !== null && v !== "theme" && !(v === "" && k !== "label"); out[k] = set ? v : (k in d ? d[k] : BUILTIN[k]); }
+  return out;
+}
+const label = (k, v) => { const it = (OPT[k] || []).find((x) => x[0] === v); return it ? it[1] : (v === true ? "On" : v === false ? "Off" : String(v)); };
+
+/* ---------------- preview ---------------- */
+const pv = $("#pv"), frame = $("#preview");
+let mounted = { w: 680, h: 220 };
+function previewCfg() {
+  const c = { style: Object.assign({}, user), setupMessages: source === "plex" };
+  if (source === "plex" && hasPlex) Object.assign(c, { demo: false, server: CFG.server, token: CFG.token, user: CFG.user || "", player: CFG.player || "", plexampOnly: CFG.plexampOnly !== false, hidePaused: false, peek: false });
+  else Object.assign(c, { demo: true, hidePaused: false, peek: false });
+  return c;
+}
+function post(msg) { try { frame.contentWindow.postMessage(msg, "*"); } catch (e) {} }
+function pushPreview() { post({ type: "pnp:config", cfg: previewCfg() }); }
+function sizePreview() {
+  const { t, variant } = themeDefaults(user);
+  const sz = (t.sizes && t.sizes[variant]) || t.size; mounted = { w: sz[0], h: sz[1] };
+  const r = pv.getBoundingClientRect(); const pad = 40;
+  const z = Math.min(1.35, (r.width - pad) / sz[0], (r.height - pad) / sz[1]);
+  frame.style.width = Math.round(sz[0] * z) + "px"; frame.style.height = Math.round(sz[1] * z) + "px";
+  $("#pvSize").textContent = sz[0] + " × " + sz[1] + " px" + (Math.abs(z - 1) > .02 ? "  ·  shown at " + Math.round(z * 100) + "%" : "");
+}
+addEventListener("message", (e) => {
+  const d = e.data; if (!d || typeof d !== "object") return;
+  if (e.source === frame.contentWindow) {
+    if (d.type === "pnp:mounted") sizePreview();
+    if (d.type === "pnp:colors" && d.accent) setAccent(d.accent);
+  }
+});
+function setAccent(hex) {
+  const c = /^#?([0-9a-f]{6})$/i.exec(hex); if (!c) return;
+  const n = parseInt(c[1], 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+  const lum = (.2126 * r + .7152 * g + .0722 * b) / 255;
+  document.documentElement.style.setProperty("--accent", "#" + c[1]);
+  document.documentElement.style.setProperty("--accent-ink", lum > .55 ? "#1a1206" : "#ffffff");
+}
+frame.addEventListener("load", () => { pushPreview(); sizePreview(); });
+frame.src = OVERLAY + "#preview=1&demo=1&setupMessages=0";
+addEventListener("resize", sizePreview);
+new ResizeObserver(sizePreview).observe(pv);
+
+/* ---------------- gallery ---------------- */
+function buildGallery() {
+  const g = $("#themesBox"); let html = '<div class="g-head"><h2>Themes</h2><span>' + META.themes.length + " looks</span></div>"; let group = "";
+  for (const t of META.themes) {
+    if (t.group !== group) { group = t.group; html += '<div class="g-group">' + esc(group) + "</div>"; }
+    const ratio = Math.min(.75, t.size[1] / t.size[0]);
+    html += '<button class="tile" data-id="' + t.id + '" aria-pressed="false"><div class="frame" style="aspect-ratio:' + (1 / ratio).toFixed(3) + '"><iframe loading="lazy" tabindex="-1" title="" src="' + OVERLAY + "#gallery=1&theme=" + t.id + '"></iframe></div><div class="tn">' + esc(t.name) + "<small>" + t.variants.length + " styles</small></div></button>";
+  }
+  g.innerHTML = html;
+  g.addEventListener("click", (e) => { const b = e.target.closest(".tile"); if (!b) return; if (b.dataset.id !== user.theme) { user.theme = b.dataset.id; user.variant = ""; changed(true); } });
+}
+
+/* ---------------- controls ---------------- */
+const SECTIONS = [
+  { id: "colors", title: "Colors", rows: [{ k: "colors", type: "swatch" }, { k: "accent", type: "color", label: "Accent", when: (r) => r.colors === "custom" }, { k: "bg", type: "color", label: "Background", when: (r) => r.colors === "custom" }, { k: "ink", type: "color", label: "Text", when: (r) => r.colors === "custom" }] },
+  { id: "type", title: "Type", rows: [{ k: "font", type: "select", label: "Font" }, { k: "textSize", type: "seg", label: "Size" }, { k: "textCase", type: "seg", label: "Letter case" }] },
+  { id: "card", title: "Card", rows: [{ k: "background", type: "select", label: "Background", sup: "background" }, { k: "ambient", type: "select", label: "Moving background", sup: "ambient" }, { k: "effect", type: "select", label: "Effect", sup: "effect" }, { k: "corners", type: "seg", label: "Corners" }, { k: "opacity", type: "range", label: "Opacity", min: 10, max: 100 }] },
+  { id: "cover", title: "Album cover", rows: [{ k: "artShape", type: "seg", label: "Shape", sup: "art" }, { k: "artMotion", type: "select", label: "Motion", sup: "art" }] },
+  { id: "music", title: "Music", rows: [{ k: "progress", type: "select", label: "Progress", sup: "progress" }, { k: "viz", type: "select", label: "Visualizer bars", sup: "viz" }, { k: "react", type: "seg", label: "React to the music" }, { k: "lyrics", type: "seg", label: "Lyrics line", sup: "lyrics" }] },
+  { id: "motion", title: "Motion", rows: [{ k: "enter", type: "select", label: "Show / hide" }, { k: "change", type: "select", label: "Song change" }, { k: "textFx", type: "select", label: "Text effect" }, { k: "marquee", type: "seg", label: "Long titles" }] },
+  { id: "show", title: "Show", rows: [{ type: "toggles", keys: [["showAlbum", "Album"], ["showYear", "Year"], ["showQuality", "Quality"], ["showTimes", "Times"], ["showEq", "Playing bars"], ["showGenre", "Genre"], ["showRating", "Stars"], ["showPlays", "Play count"], ["showDevice", "Device"]] }, { k: "label", type: "text", label: "Small label", ph: "e.g. Now playing" }] }
+];
+const NOTES = { background: "This theme draws its own background.", ambient: "This theme has its own scenery.", effect: "", art: "This theme handles the cover its own way.", progress: "This theme shows progress its own way.", viz: "Not used by this theme.", lyrics: "" };
+const closed = new Set(store.get("pnp-studio-closed", ["type", "motion", "show"]));
+
+function rowHead(k, r, lab) {
+  const isDefault = user[k] === undefined || user[k] === "theme";
+  return '<div class="lab"><b>' + esc(lab) + "</b>" + (isDefault && k !== "label" ? '<span class="def">' + (r[k] === "theme" ? "theme default" : "theme default: " + esc(label(k, r[k]))) + "</span>" : '<button class="link" data-reset="' + k + '">use theme default</button>') + "</div>";
+}
+function swatchHtml(r) {
+  const t = T[user.theme]; const cur = user.colors === undefined ? "theme" : user.colors;
+  const items = [["theme", "Default"], ["album", "Album"]].concat(t.palette ? [["own", "Theme's"]] : []).concat([["custom", "Custom"]]).concat(Object.keys(PAL).map((k) => [k, PAL[k].name]));
+  return '<div class="swatches">' + items.map(([v, n]) => {
+    let style = "";
+    if (PAL[v]) style = "background:linear-gradient(135deg," + PAL[v].bg.join(",") + ");--sa:" + PAL[v].accent;
+    else if (v === "album") style = "background:linear-gradient(135deg,#7a2e1c,#c98a3c 50%,#18234d);--sa:var(--accent)";
+    else if (v === "custom") style = "background:conic-gradient(#ff5d5d,#ffd23f,#5dffa0,#5dc8ff,#c25dff,#ff5d5d)";
+    else if (v === "own") style = "background:linear-gradient(135deg,#2b2d34,#4a4d57);--sa:#3dff7a";
+    else style = "background:repeating-linear-gradient(45deg,#3a3229 0 4px,#2c261f 4px 8px)";
+    return '<button class="sw" data-k="colors" data-v="' + v + '" aria-pressed="' + (cur === v) + '"><i style="' + style + '"></i>' + esc(n) + "</button>";
+  }).join("") + "</div>";
+}
+function buildControls() {
+  const r = resolved(user); const t = T[user.theme]; const sup = t.supports || {};
+  let html = "";
+  for (const sec of SECTIONS) {
+    html += '<div class="sec' + (closed.has(sec.id) ? " closed" : "") + '" data-sec="' + sec.id + '"><button aria-expanded="' + !closed.has(sec.id) + '">' + sec.title + '</button><div class="rows">';
+    for (const row of sec.rows) {
+      if (row.when && !row.when(r)) continue;
+      const off = row.sup && sup[row.sup] === false;
+      if (row.type === "toggles") {
+        html += '<div class="row"><div class="toggles">' + row.keys.map(([k, n]) => '<label class="tog"><input type="checkbox" data-k="' + k + '"' + (r[k] ? " checked" : "") + "> " + esc(n) + "</label>").join("") + "</div></div>";
+        continue;
+      }
+      const k = row.k;
+      html += '<div class="row' + (off ? " off" : "") + '">';
+      if (row.type === "swatch") html += rowHead(k, r, "Palette") + swatchHtml(r);
+      else if (row.type === "select") {
+        const cur = user[k] === undefined ? "theme" : user[k];
+        const opts = OPT[k].filter((o) => o[0] !== "own" || t.palette);
+        html += rowHead(k, r, row.label) + '<div class="sel"><select data-k="' + k + '"' + (off ? " disabled" : "") + ">" + opts.map((o) => '<option value="' + o[0] + '"' + (o[0] === cur ? " selected" : "") + ">" + esc(o[1]) + "</option>").join("") + "</select></div>";
+      } else if (row.type === "seg") {
+        const cur = user[k] === undefined ? (OPT[k][0][0] === "theme" ? "theme" : r[k]) : user[k];
+        html += rowHead(k, r, row.label) + '<div class="segs" role="group">' + OPT[k].map((o) => '<button data-k="' + k + '" data-v="' + o[0] + '" aria-pressed="' + (o[0] === cur) + '"' + (off ? " disabled" : "") + ">" + esc(o[0] === "theme" ? "Default" : o[1]) + "</button>").join("") + "</div>";
+      } else if (row.type === "color") {
+        const v = user[k] || ""; const show = /^#[0-9a-f]{6}$/i.test(v) ? v : ({ accent: "#e5a00d", bg: "#1b1b2a", ink: "#ffffff" })[k];
+        html += '<div class="lab"><b>' + row.label + '</b></div><div class="colorrow"><input type="color" data-k="' + k + '" value="' + show + '"><input type="text" data-k="' + k + '" value="' + esc(v) + '" placeholder="' + show + '" spellcheck="false"><button class="link" data-reset="' + k + '">clear</button></div>';
+      } else if (row.type === "range") {
+        const v = Number(user[k] != null ? user[k] : r[k]);
+        html += '<div class="lab"><b>' + row.label + '</b></div><div class="range"><input type="range" data-k="' + k + '" min="' + row.min + '" max="' + row.max + '" value="' + v + '"><output>' + v + "%</output></div>";
+      } else if (row.type === "text") {
+        html += '<div class="lab"><b>' + row.label + '</b></div><input class="txt" type="text" data-k="' + k + '" value="' + esc(user[k] || "") + '" placeholder="' + esc(row.ph || "") + '">';
+      }
+      if (off && NOTES[row.sup]) html += '<span class="note">' + NOTES[row.sup] + "</span>";
+      html += "</div>";
+    }
+    html += "</div></div>";
+  }
+  html += '<div class="resetall"><button class="btn" id="bResetAll">Reset everything to this theme\'s defaults</button></div>';
+  $("#controls").innerHTML = html;
+}
+function buildHeader() {
+  const t = T[user.theme]; const { variant } = themeDefaults(user);
+  $("#thName").textContent = t.name; $("#thBlurb").textContent = t.blurb || "";
+  $("#variants").innerHTML = t.variants.map((v) => '<button class="chip" data-variant="' + v[0] + '" aria-pressed="' + (v[0] === variant) + '">' + esc(v[1]) + "</button>").join("");
+  document.querySelectorAll(".tile").forEach((b) => b.setAttribute("aria-pressed", b.dataset.id === user.theme));
+}
+
+/* ---------------- change handling ---------------- */
+let sendTimer = 0;
+function changed(structural) {
+  for (const k of Object.keys(user)) if (user[k] === "theme" || user[k] === undefined) delete user[k];
+  store.set("pnp-studio-style", user);
+  $("#code").value = encode(user);
+  if (structural) { buildHeader(); sizePreview(); }
+  buildControls();
+  pushPreview();
+  renderPresets();
+  if (ws.live && ws.ready) { clearTimeout(sendTimer); sendTimer = setTimeout(sendToObs, 450); }
+}
+function setKey(k, v) {
+  if (v === "theme" || v === undefined) delete user[k]; else user[k] = v;
+  changed(k === "colors");
+}
+$("#controls").addEventListener("click", (e) => {
+  const sec = e.target.closest(".sec > button");
+  if (sec) { const id = sec.parentElement.dataset.sec; sec.parentElement.classList.toggle("closed"); closed.has(id) ? closed.delete(id) : closed.add(id); store.set("pnp-studio-closed", Array.from(closed)); return; }
+  const rs = e.target.closest("[data-reset]"); if (rs) { setKey(rs.dataset.reset, undefined); return; }
+  const b = e.target.closest("button[data-k]"); if (b && !b.disabled) { setKey(b.dataset.k, b.dataset.v); return; }
+  if (e.target.id === "bResetAll") { user = { theme: user.theme, variant: user.variant }; changed(true); toast("Back to " + T[user.theme].name + "'s defaults"); }
+});
+$("#controls").addEventListener("change", (e) => {
+  const el = e.target; const k = el.dataset.k; if (!k) return;
+  if (el.type === "checkbox") { user[k] = el.checked; changed(false); }
+  else if (el.tagName === "SELECT") setKey(k, el.value);
+  else if (el.type === "color") setKey(k, el.value);
+  else if (el.type === "text" && (k === "accent" || k === "bg" || k === "ink")) { const v = el.value.trim(); if (!v) setKey(k, undefined); else if (/^#?[0-9a-f]{6}$/i.test(v)) setKey(k, v[0] === "#" ? v : "#" + v); else el.value = user[k] || ""; }
+  else if (el.type === "text") setKey(k, el.value);
+  else if (el.type === "range") setKey(k, Number(el.value));
+});
+$("#controls").addEventListener("input", (e) => {
+  const el = e.target;
+  if (el.type === "range") { el.nextElementSibling.textContent = el.value + "%"; user[el.dataset.k] = Number(el.value); store.set("pnp-studio-style", user); $("#code").value = encode(user); pushPreview(); }
+  if (el.type === "color") { user[el.dataset.k] = el.value; pushPreview(); }
+});
+$("#variants").addEventListener("click", (e) => { const b = e.target.closest("[data-variant]"); if (b) { user.variant = b.dataset.variant; changed(true); } });
+
+/* ---------------- header controls ---------------- */
+function segInit(id, cur, fn) {
+  const seg = $(id);
+  seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === cur));
+  seg.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b || b.disabled) return; seg.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); });
+}
+const plexBtn = $('#srcSeg [data-v="plex"]');
+if (!hasPlex) { plexBtn.disabled = true; plexBtn.title = "Set up the OBS script first (server and token), then reopen the Studio."; }
+segInit("#srcSeg", "demo", (v) => { source = v; pushPreview(); });
+function setBackdrop(v) {
+  backdrop = v; store.set("pnp-studio-backdrop", v === "obs" ? "stream" : v);
+  $("#bd").className = "bd bd-" + v;
+  if (v === "obs") grabScene(); else $("#bd").style.backgroundImage = "";
+}
+segInit("#bdSeg", backdrop, setBackdrop);
+setBackdrop(backdrop);
+$("#bReplay").addEventListener("click", () => post({ type: "pnp:replay" }));
+$("#bNext").addEventListener("click", () => post({ type: "pnp:next" }));
+$("#bPause").addEventListener("click", (e) => { paused = !paused; post({ type: "pnp:pause", paused }); e.target.textContent = paused ? "Play" : "Pause"; });
+
+let toastT = 0;
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2200); }
+$("#bCopy").addEventListener("click", async () => {
+  const code = $("#code").value;
+  try { await navigator.clipboard.writeText(code); toast("Style code copied"); }
+  catch (e) { const i = $("#code"); i.removeAttribute("readonly"); i.select(); document.execCommand("copy"); i.setAttribute("readonly", ""); toast("Style code copied"); }
+});
+$("#bLoad").addEventListener("click", () => {
+  const v = prompt("Paste a style code (it starts with pnp1.)");
+  if (v == null) return;
+  const d = decode(v); if (!d) { toast("That isn't a style code"); return; }
+  user = d; activePreset = null; changed(true); toast("Loaded " + T[user.theme].name);
+});
+
+/* ---------------- my presets ----------------
+   OBS presets live in presets.json next to the OBS script (presets.js mirrors it for this page).
+   The Studio changes them by sending small edits through obs-websocket; the script applies them.
+   Without a connection, presets are kept in this browser until you add them to OBS. */
+const PRESET_SLOTS = 10;
+const lower = (x) => String(x || "").toLowerCase();
+const validPreset = (p) => !!(p && typeof p.name === "string" && p.name.trim() && decode(p.code));
+const canon = (code) => { const d = decode(code); return d ? encode(d) : String(code || ""); };   // same look, same text
+const cleanName = (x) => String(x || "").replace(/[\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
+let obsPresets = (Array.isArray(window.PNP_PRESETS) ? window.PNP_PRESETS : []).filter(validPreset).map((p) => ({ name: cleanName(p.name), code: canon(p.code.trim()) }));
+let localPresets = store.get("pnp-studio-presets", []).filter(validPreset).map((p) => ({ name: cleanName(p.name), code: canon(p.code) }));
+let activePreset = null;            // { where: "obs" | "local", name }
+let quietUntil = 0;                 // ignore presets.js for a moment after sending an edit
+const canEditObs = () => ws.ready && ws.targets.length > 0;
+const saveLocal = () => store.set("pnp-studio-presets", localPresets);
+function listOf(where) { return where === "obs" ? obsPresets : localPresets; }
+function findPreset(where, name) { const list = listOf(where); const i = list.findIndex((p) => lower(p.name) === lower(name)); return i < 0 ? null : { list, i, p: list[i] }; }
+function allPresets() {
+  return obsPresets.map((p, i) => ({ name: p.name, code: p.code, where: "obs", slot: i + 1 }))
+    .concat(localPresets.map((p) => ({ name: p.name, code: p.code, where: "local" })));
+}
+function isActive(p) { return !!(activePreset && activePreset.where === p.where && lower(activePreset.name) === lower(p.name)); }
+function suggestName() {
+  const t = T[user.theme]; const v = t.variants.find((x) => x[0] === themeDefaults(user).variant);
+  let base = t.name + (v && t.variants.length > 1 ? " – " + v[1] : ""), name = base, n = 2;
+  while (findPreset("obs", name) || findPreset("local", name)) name = base + " " + n++;
+  return name;
+}
+
+function renderPresets() {
+  const box = $("#presetList"); if (!box) return;
+  const all = allPresets(); const cur = encode(user);
+  $("#pCount").textContent = all.length ? all.length + (all.length === 1 ? " look" : " looks") : "";
+  $("#pEmpty").hidden = all.length > 0;
+  const pushAll = $("#bPushAll");
+  pushAll.hidden = !(localPresets.length && canEditObs());
+  pushAll.textContent = "Add " + localPresets.length + " to OBS";
+  const old = new Map(); box.querySelectorAll(".ptile").forEach((el) => old.set(el.dataset.key, el));
+  const want = [];
+  for (const p of all) {
+    const key = p.where + ":" + lower(p.name);
+    let el = old.get(key); old.delete(key);
+    if (!el) {
+      el = document.createElement("div"); el.className = "ptile"; el.dataset.key = key;
+      el.innerHTML = '<button class="pt-main" type="button"><div class="frame"><iframe loading="lazy" tabindex="-1" title=""></iframe></div><div class="tn"><span class="pt-name"></span><small></small></div></button><div class="pt-actions"></div>';
+    }
+    el.dataset.where = p.where; el.dataset.name = p.name;
+    if (el._code !== p.code) {
+      const d = decode(p.code); const t = T[d.theme]; const vids = t.variants.map((x) => x[0]);
+      const va = vids.includes(d.variant) ? d.variant : (vids[0] || ""); const sz = (t.sizes && t.sizes[va]) || t.size;
+      el.querySelector(".frame").style.aspectRatio = (sz[0] / Math.max(sz[1], sz[0] * .42)).toFixed(3);
+      el.querySelector("iframe").src = OVERLAY + "#gallery=1&styleCode=" + encodeURIComponent(p.code);
+      el._code = p.code;
+    }
+    el.querySelector(".pt-name").textContent = p.name;
+    const tag = el.querySelector("small");
+    tag.textContent = p.where === "obs" ? (p.slot <= PRESET_SLOTS ? "Hotkey " + p.slot : "Preset " + p.slot) : "This browser";
+    tag.className = p.where === "obs" && p.slot <= PRESET_SLOTS ? "slot" : "";
+    el.querySelector(".pt-main").title = "Use this look" + (p.where === "obs" ? " (Plexamp: Preset " + p.slot + ")" : "");
+    const active = isActive(p), dirty = active && p.code !== cur;
+    el.setAttribute("aria-current", active ? "true" : "false");
+    el.classList.toggle("dirty", dirty);
+    const acts = el.querySelector(".pt-actions");
+    if (active) {
+      const obs = p.where === "obs", can = !obs || canEditObs();
+      const list = listOf(p.where); const idx = list.findIndex((x) => lower(x.name) === lower(p.name));
+      const armed = acts.querySelector(".danger.armed") && el._armedUntil > Date.now();
+      acts.innerHTML =
+        '<button data-act="update" class="' + (dirty ? "go" : "") + '"' + (dirty && can ? "" : " disabled") + ">Save changes</button>" +
+        '<button data-act="rename"' + (can ? "" : " disabled") + ">Rename</button>" +
+        '<button data-act="up" title="Move up"' + (can && idx > 0 ? "" : " disabled") + ">↑</button>" +
+        '<button data-act="down" title="Move down"' + (can && idx < list.length - 1 ? "" : " disabled") + ">↓</button>" +
+        (obs ? "" : '<button data-act="push"' + (canEditObs() ? "" : " disabled title=\"Connect to OBS first\"") + ">Add to OBS</button>") +
+        '<button data-act="delete" class="danger' + (armed ? " armed" : "") + '"' + (can ? "" : " disabled") + ">" + (armed ? "Sure? Delete" : "Delete") + "</button>" +
+        (obs && !canEditObs() ? '<span class="pt-note">Connect to OBS to change this preset. You can still try it here.</span>' : "") +
+        (!obs ? '<span class="pt-note">Only in this browser. ' + (canEditObs() ? "Add it to OBS to use it with hotkeys." : "Connect to OBS to add it to your OBS presets.") + "</span>" : "");
+    } else acts.innerHTML = "";
+    want.push(el);
+  }
+  old.forEach((el) => el.remove());
+  const now = Array.from(box.children);
+  if (now.length !== want.length || now.some((el, i) => el !== want[i])) want.forEach((el) => box.appendChild(el));
+}
+
+// edits to OBS presets go one at a time, spaced out so the script (which checks every 0.7 s) sees each one
+const opQueue = []; let opBusy = false, lastOpAt = 0;
+function sendOp(op) { opQueue.push(op); quietUntil = Date.now() + 4000; pumpOps(); }
+async function pumpOps() {
+  if (opBusy) return; opBusy = true;
+  while (opQueue.length) {
+    const wait = lastOpAt + 900 - Date.now();
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    const op = opQueue.shift(); const rev = String(Date.now());
+    try { for (const name of ws.targets) await request("SetInputSettings", { inputName: name, inputSettings: { pnp_preset_op: JSON.stringify(op), pnp_preset_rev: rev }, overlay: true }); }
+    catch (e) { toast("Couldn't reach OBS: " + e.message); }
+    lastOpAt = Date.now(); quietUntil = Date.now() + 2500;
+  }
+  opBusy = false;
+}
+
+function usePreset(where, name) {
+  const f = findPreset(where, name); if (!f) return;
+  user = decode(f.p.code); activePreset = { where, name: f.p.name };
+  changed(true);
+}
+function savePreset(where, name, code) {
+  name = cleanName(name); if (!name) return null;
+  const f = findPreset(where, name);
+  if (where === "obs") {
+    if (!canEditObs()) { toast("Connect to OBS to change your OBS presets"); return null; }
+    sendOp({ op: "save", name: f ? f.p.name : name, code });
+  }
+  if (f) f.p.code = code; else listOf(where).push({ name, code });
+  if (where === "local") saveLocal();
+  activePreset = { where, name: f ? f.p.name : name };
+  renderPresets();
+  return f ? "updated" : "added";
+}
+function renamePreset(where, name, to) {
+  to = cleanName(to); const f = findPreset(where, name); if (!f || !to) return "Type a name.";
+  const g = findPreset(where, to); if (g && g.i !== f.i) return 'There\'s already a preset called "' + g.p.name + '".';
+  if (where === "obs") { if (!canEditObs()) return "Connect to OBS first."; sendOp({ op: "rename", name: f.p.name, to }); }
+  f.p.name = to; if (where === "local") saveLocal();
+  if (activePreset && activePreset.where === where && lower(activePreset.name) === lower(name)) activePreset.name = to;
+  renderPresets(); return "";
+}
+function movePreset(where, name, delta) {
+  const f = findPreset(where, name); if (!f) return;
+  const to = Math.max(0, Math.min(f.list.length - 1, f.i + delta)); if (to === f.i) return;
+  if (where === "obs") { if (!canEditObs()) return; sendOp({ op: "move", name: f.p.name, index: to + 1 }); }
+  f.list.splice(to, 0, f.list.splice(f.i, 1)[0]);
+  if (where === "local") saveLocal();
+  renderPresets();
+}
+function deletePreset(where, name) {
+  const f = findPreset(where, name); if (!f) return;
+  if (where === "obs") { if (!canEditObs()) return; sendOp({ op: "delete", name: f.p.name }); }
+  f.list.splice(f.i, 1);
+  if (where === "local") saveLocal();
+  if (activePreset && activePreset.where === where && lower(activePreset.name) === lower(name)) activePreset = null;
+  renderPresets(); toast('Deleted "' + f.p.name + '"');
+}
+function pushToObs(name) {
+  const f = findPreset("local", name); if (!f || !canEditObs()) return;
+  const replacing = findPreset("obs", f.p.name);
+  sendOp({ op: "save", name: replacing ? replacing.p.name : f.p.name, code: f.p.code });
+  if (replacing) replacing.p.code = f.p.code; else obsPresets.push({ name: f.p.name, code: f.p.code });
+  localPresets.splice(f.i, 1); saveLocal();
+  if (activePreset && activePreset.where === "local" && lower(activePreset.name) === lower(name)) activePreset = { where: "obs", name: replacing ? replacing.p.name : f.p.name };
+  renderPresets();
+}
+
+$("#presetList").addEventListener("click", (e) => {
+  const tile = e.target.closest(".ptile"); if (!tile) return;
+  const where = tile.dataset.where, name = tile.dataset.name;
+  if (e.target.closest(".pt-main")) { usePreset(where, name); return; }
+  const b = e.target.closest("button[data-act]"); if (!b || b.disabled) return;
+  const act = b.dataset.act;
+  if (act === "update") { const r = savePreset(where, name, encode(user)); if (r) toast('Saved changes to "' + name + '"'); }
+  else if (act === "rename") openNameDialog("rename", where, name);
+  else if (act === "up") movePreset(where, name, -1);
+  else if (act === "down") movePreset(where, name, 1);
+  else if (act === "push") { pushToObs(name); toast('Added "' + name + '" to OBS'); }
+  else if (act === "delete") {
+    if (b.classList.contains("armed") && tile._armedUntil > Date.now()) deletePreset(where, name);
+    else { tile._armedUntil = Date.now() + 4000; b.classList.add("armed"); b.textContent = "Sure? Delete"; setTimeout(() => { if (b.isConnected) { b.classList.remove("armed"); b.textContent = "Delete"; } }, 4000); }
+  }
+});
+$("#bPushAll").addEventListener("click", () => {
+  const n = localPresets.length; localPresets.slice().forEach((p) => pushToObs(p.name));
+  toast("Adding " + n + (n === 1 ? " preset" : " presets") + " to OBS");
+});
+
+// save / rename dialog
+const nameDlg = $("#nameDlg"); let nameMode = null;
+function nameNote() {
+  const name = cleanName($("#ndName").value), note = $("#ndNote"); note.className = "nd-note";
+  if (nameMode.mode === "rename") { note.textContent = ""; return; }
+  const where = canEditObs() ? "obs" : "local"; const f = name && findPreset(where, name);
+  const slot = where === "obs" ? (f ? f.i + 1 : obsPresets.length + 1) : 0;
+  note.textContent = (f ? 'This replaces your preset "' + f.p.name + '". ' : "") +
+    (where === "obs" ? "Saves to OBS as preset " + slot + (slot <= PRESET_SLOTS ? ', so the hotkey "Plexamp: Preset ' + slot + '" switches to it.' : ".")
+      : "You're not connected to OBS, so this is saved in this browser. Connect to OBS to add it to your OBS presets (that's what the hotkeys use).");
+  $("#ndOk").textContent = f ? "Replace" : "Save";
+}
+function openNameDialog(mode, where, name) {
+  nameMode = { mode, where, name };
+  $("#ndTitle").textContent = mode === "rename" ? 'Rename "' + name + '"' : "Save this look as a preset";
+  $("#ndName").value = mode === "rename" ? name : suggestName();
+  $("#ndOk").textContent = mode === "rename" ? "Rename" : "Save";
+  nameNote();
+  nameDlg.showModal(); $("#ndName").select();
+}
+$("#ndName").addEventListener("input", () => { if (nameMode && nameMode.mode === "save") nameNote(); });
+$("#ndCancel").addEventListener("click", () => nameDlg.close());
+$("#nameForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = cleanName($("#ndName").value);
+  if (!name) { $("#ndNote").textContent = "Type a name."; $("#ndNote").className = "nd-note err"; return; }
+  if (nameMode.mode === "rename") {
+    const err = renamePreset(nameMode.where, nameMode.name, name);
+    if (err) { $("#ndNote").textContent = err; $("#ndNote").className = "nd-note err"; return; }
+    nameDlg.close(); toast("Renamed to \"" + name + "\""); return;
+  }
+  const where = canEditObs() ? "obs" : "local";
+  const r = savePreset(where, name, encode(user));
+  nameDlg.close();
+  if (r) toast((r === "updated" ? "Replaced" : "Saved") + ' "' + name + '"' + (where === "obs" ? " in OBS" : " in this browser"));
+});
+$("#bSaveP").addEventListener("click", () => openNameDialog("save"));
+$("#bSaveP2").addEventListener("click", () => openNameDialog("save"));
+
+// keep the list in step with presets.js (the OBS script rewrites it whenever presets change)
+function loadPresetsFile(force) {
+  if (!force && (Date.now() < quietUntil || document.hidden)) return;
+  const sc = document.createElement("script");
+  sc.src = "presets.js?t=" + Date.now();
+  sc.onload = () => {
+    sc.remove();
+    if (Date.now() < quietUntil && !force) return;
+    const list = (Array.isArray(window.PNP_PRESETS) ? window.PNP_PRESETS : []).filter(validPreset).map((p) => ({ name: cleanName(p.name), code: canon(p.code.trim()) }));
+    if (JSON.stringify(list) === JSON.stringify(obsPresets)) return;
+    obsPresets = list;
+    if (activePreset && activePreset.where === "obs" && !findPreset("obs", activePreset.name)) activePreset = null;
+    renderPresets();
+  };
+  sc.onerror = () => sc.remove();
+  document.head.appendChild(sc);
+}
+setInterval(loadPresetsFile, 3000);
+// if the look you're using in OBS is one of your presets, select it
+(() => { const c = encode(user); const p = obsPresets.find((x) => x.code === c) || localPresets.find((x) => x.code === c); if (p) activePreset = { where: obsPresets.includes(p) ? "obs" : "local", name: p.name }; })();
+
+/* ---------------- obs-websocket ---------------- */
+// SHA-256 (small, so it works from a local file without crypto.subtle)
+function sha256(bytes) {
+  const K = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+  let H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+  const l = bytes.length, withOne = l + 1, k = (64 - ((withOne + 8) % 64)) % 64, total = withOne + k + 8;
+  const m = new Uint8Array(total); m.set(bytes); m[l] = 0x80;
+  const bits = l * 8; const dv = new DataView(m.buffer); dv.setUint32(total - 8, Math.floor(bits / 4294967296)); dv.setUint32(total - 4, bits >>> 0);
+  const w = new Uint32Array(64);
+  for (let off = 0; off < total; off += 64) {
+    for (let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i * 4);
+    for (let i = 16; i < 64; i++) { const a = w[i - 15], b = w[i - 2]; const s0 = ((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3); const s1 = ((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10); w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0; }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++) {
+      const S1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7)); const ch = (e & f) ^ (~e & g); const t1 = (h + S1 + ch + K[i] + w[i]) >>> 0;
+      const S0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10)); const mj = (a & b) ^ (a & c) ^ (b & c); const t2 = (S0 + mj) >>> 0;
+      h = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+    }
+    H = [H[0] + a, H[1] + b, H[2] + c, H[3] + d, H[4] + e, H[5] + f, H[6] + g, H[7] + h].map((x) => x >>> 0);
+  }
+  const out = new Uint8Array(32); const ov = new DataView(out.buffer); H.forEach((x, i) => ov.setUint32(i * 4, x)); return out;
+}
+const enc = (s) => new TextEncoder().encode(s);
+const b64bytes = (b) => { let s = ""; for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s); };
+function wsAuth(password, salt, challenge) { return b64bytes(sha256(enc(b64bytes(sha256(enc(password + salt))) + challenge))); }
+window.__pnpAuth = wsAuth;
+
+const ws = { sock: null, ready: false, live: true, pending: new Map(), seq: 0, targets: [], err: "" };
+const dlg = $("#obsDlg");
+function setObsStatus(text, kind) {
+  const s = $("#wsStatus"); s.textContent = text; s.className = "status" + (kind ? " " + kind : "");
+  const btn = $("#obsBtn"); btn.className = "obs-btn" + (ws.ready ? (ws.live ? " on" : " idle") : kind === "err" ? " err" : "");
+  btn.querySelector("span").textContent = ws.ready ? (ws.targets.length ? "Connected to OBS" : "Connected, no overlay") : "Connect to OBS";
+  $("#bSend").disabled = !(ws.ready && ws.targets.length);
+  $('#bdSeg [data-v="obs"]').disabled = !ws.ready; $('#bdSeg [data-v="obs"]').title = ws.ready ? "" : "Connect to OBS first";
+  $("#wsConnect").disabled = !!ws.sock; $("#wsDisconnect").disabled = !ws.sock;
+  renderPresets();
+}
+function request(type, data) {
+  return new Promise((resolve, reject) => {
+    if (!ws.ready) return reject(new Error("not connected"));
+    const id = "r" + (++ws.seq); ws.pending.set(id, { resolve, reject });
+    ws.sock.send(JSON.stringify({ op: 6, d: { requestType: type, requestId: id, requestData: data || {} } }));
+    setTimeout(() => { if (ws.pending.has(id)) { ws.pending.delete(id); reject(new Error("timeout")); } }, 5000);
+  });
+}
+async function findTargets() {
+  const r = await request("GetInputList", { inputKind: "browser_source" });
+  const out = [];
+  for (const inp of (r.inputs || [])) {
+    try { const s = await request("GetInputSettings", { inputName: inp.inputName }); const lf = String((s.inputSettings || {}).local_file || ""); if (lf.endsWith(OVERLAY)) out.push(inp.inputName); } catch (e) {}
+  }
+  ws.targets = out;
+  loadPresetsFile(true);
+  if (out.length) setObsStatus("Connected. Found " + (out.length === 1 ? "your overlay: " + out[0] : out.length + " overlays: " + out.join(", ")) + ".", "ok");
+  else setObsStatus("Connected, but there's no Plexamp Now Playing overlay in OBS yet. In Tools → Scripts → Plexamp Now Playing, click Add overlay to current scene, then reconnect.", "err");
+}
+async function sendToObs() {
+  if (!ws.ready || !ws.targets.length) return;
+  const code = encode(user); const rev = String(Date.now());
+  try {
+    for (const name of ws.targets) await request("SetInputSettings", { inputName: name, inputSettings: { pnp_style: code, pnp_style_rev: rev }, overlay: true });
+    if (!ws.live) toast("Sent to OBS");
+  } catch (e) { toast("Couldn't send: " + e.message); }
+}
+function connect() {
+  const url = $("#wsUrl").value.trim() || "ws://127.0.0.1:4455"; const pass = $("#wsPass").value;
+  if ($("#wsRemember").checked) store.set("pnp-ws", { url, pass }); else store.set("pnp-ws", { url });
+  let sock;
+  try { sock = new WebSocket(url, "obswebsocket.json"); } catch (e) { setObsStatus("That address doesn't look right. It should look like ws://127.0.0.1:4455", "err"); return; }
+  ws.sock = sock; ws.ready = false; setObsStatus("Connecting…");
+  sock.onmessage = async (e) => {
+    let m; try { m = JSON.parse(e.data); } catch (err) { return; }
+    if (m.op === 0) {
+      const d = { rpcVersion: 1, eventSubscriptions: 0 };
+      if (m.d.authentication) d.authentication = wsAuth(pass, m.d.authentication.salt, m.d.authentication.challenge);
+      sock.send(JSON.stringify({ op: 1, d }));
+    } else if (m.op === 2) {
+      ws.ready = true; setObsStatus("Connected. Looking for the overlay…", "ok");
+      try { await findTargets(); if (ws.live && ws.targets.length) sendToObs(); } catch (err) { setObsStatus("Connected, but OBS didn't answer: " + err.message, "err"); }
+    } else if (m.op === 7) {
+      const p = ws.pending.get(m.d.requestId); if (!p) return; ws.pending.delete(m.d.requestId);
+      if (m.d.requestStatus && m.d.requestStatus.result) p.resolve(m.d.responseData || {}); else p.reject(new Error((m.d.requestStatus && m.d.requestStatus.comment) || "request failed"));
+    }
+  };
+  sock.onclose = (e) => {
+    const wasReady = ws.ready; ws.sock = null; ws.ready = false; ws.targets = [];
+    const msg = e.code === 4009 ? "OBS rejected the password. Copy it again from Tools → WebSocket Server Settings → Show Connect Info." :
+      wasReady ? "Disconnected from OBS." : "Couldn't reach OBS at " + url + ". Make sure OBS is open and Enable WebSocket server is ticked.";
+    setObsStatus(msg, wasReady && e.code === 1000 ? "" : "err");
+    if (backdrop === "obs") { setBackdrop("stream"); document.querySelectorAll("#bdSeg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.v === "stream")); }
+  };
+  sock.onerror = () => {};
+}
+const saved = store.get("pnp-ws", null);
+if (saved) { $("#wsUrl").value = saved.url || "ws://127.0.0.1:4455"; if (saved.pass) { $("#wsPass").value = saved.pass; $("#wsRemember").checked = true; } }
+$("#obsBtn").addEventListener("click", () => dlg.showModal());
+$("#wsConnect").addEventListener("click", connect);
+$("#wsDisconnect").addEventListener("click", () => { if (ws.sock) ws.sock.close(1000); });
+$("#wsLive").addEventListener("change", (e) => { ws.live = e.target.checked; setObsStatus($("#wsStatus").textContent, ws.ready ? "ok" : ""); if (ws.live) sendToObs(); });
+$("#bSend").addEventListener("click", () => { sendToObs(); toast("Sent to OBS"); });
+let sceneTimer = 0;
+async function grabScene() {
+  clearTimeout(sceneTimer);
+  if (backdrop !== "obs" || !ws.ready) return;
+  try {
+    const sc = await request("GetCurrentProgramScene");
+    const name = sc.sceneName || sc.currentProgramSceneName;
+    const shot = await request("GetSourceScreenshot", { sourceName: name, imageFormat: "jpg", imageWidth: 1280, imageCompressionQuality: 70 });
+    if (shot.imageData) $("#bd").style.backgroundImage = 'url("' + shot.imageData + '")';
+  } catch (e) {}
+  sceneTimer = setTimeout(grabScene, 4000);
+}
+if (saved && saved.pass) connect();
+
+/* ---------------- start ---------------- */
+buildGallery();
+changed(true);
+setObsStatus("Not connected.");
+if (CFG && (CFG.styleCode || CFG.theme)) toast("Loaded the look you're using in OBS");
+})();
+</script>
+</body>
+</html>
